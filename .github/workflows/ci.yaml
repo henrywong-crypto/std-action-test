@@ -69,7 +69,7 @@ jobs:
         with:
           extra_nix_config: |
             ${{ needs.discover.outputs.nix_conf }}
-          json: ${{ toJSON(matrix.target) }}
+          discovery_json: ${{ toJSON(matrix.target) }}
           # optional:
           nix_access_tokens: github.com=${{ secrets.HUB_PAT }}
           #nix_key: ${{ secrets.NIX_SECRET_KEY }}
