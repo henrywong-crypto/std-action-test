@@ -9,7 +9,7 @@
     cellsFrom = ./nix;
 
     cellBlocks = with std.blockTypes; [
-      (devshells "devshells" {ci.build = true;})
+      (devshells "devshells" {ci.run = true;})
     ];
   }
 
