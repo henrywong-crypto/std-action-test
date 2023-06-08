@@ -24,7 +24,7 @@ jobs:
         uses: divnix/std-action/discover@main
         id: discovery
         with:
-          github_pat: ${{ secrets.HUB_PAT }}
+          nix_access_tokens: github.com=${{ secrets.HUB_PAT }}
 
   #build-packages: &run-job
   #  needs: discover
