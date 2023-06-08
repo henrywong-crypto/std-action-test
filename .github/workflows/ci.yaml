@@ -71,7 +71,7 @@ jobs:
             ${{ needs.discover.outputs.nix_conf }}
           json: ${{ toJSON(matrix.target) }}
           # optional:
-          github_pat: ${{ secrets.HUB_PAT }}
+          nix_access_tokens: github.com=${{ secrets.HUB_PAT }}
           #nix_key: ${{ secrets.NIX_SECRET_KEY }}
           #nix_ssh_key: ${{ secrets.NIXBUILD_SSH }}
           #cache: s3://nix?endpoint=sfo3.digitaloceanspaces.com
