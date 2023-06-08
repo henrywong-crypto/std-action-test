@@ -26,11 +26,37 @@ jobs:
         with:
           github_pat: ${{ secrets.HUB_PAT }}
 
-  build-packages: &run-job
+  #build-packages: &run-job
+  #  needs: discover
+  #  strategy:
+  #    matrix:
+  #      target: ${{ fromJSON(needs.discover.outputs.hits).packages.build }}
+  #  name: ${{ matrix.target.cell }} - ${{ matrix.target.name }}
+  #  runs-on: ubuntu-latest
+  #  steps:
+  #    #- name: Configure AWS Credentials
+  #    #  uses: aws-actions/configure-aws-credentials@v1-node16
+  #    #  with:
+  #    #    role-to-assume: arn:aws:iam::123456789100:role/my-github-actions-role
+  #    #    aws-region: us-east-2
+  #    - uses: divnix/std-action/run@main
+  #      with:
+  #        extra_nix_config: |
+  #          ${{ needs.discover.outputs.nix_conf }}
+  #        json: ${{ toJSON(matrix.target) }}
+  #        # optional:
+  #        github_pat: ${{ secrets.HUB_PAT }}
+  #        #nix_key: ${{ secrets.NIX_SECRET_KEY }}
+  #        #nix_ssh_key: ${{ secrets.NIXBUILD_SSH }}
+  #        #cache: s3://nix?endpoint=sfo3.digitaloceanspaces.com
+  #        #builder: ssh-ng://eu.nixbuild.net
+  #        #ssh_known_hosts: "eu.nixbuild.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM"
+
+  build-devshells:
     needs: discover
     strategy:
       matrix:
-        target: ${{ fromJSON(needs.discover.outputs.hits).packages.build }}
+        target: ${{ fromJSON(needs.discover.outputs.hits).devshells.build }}
     name: ${{ matrix.target.cell }} - ${{ matrix.target.name }}
     runs-on: ubuntu-latest
     steps:
@@ -52,14 +78,8 @@ jobs:
           #builder: ssh-ng://eu.nixbuild.net
           #ssh_known_hosts: "eu.nixbuild.net ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIPIQCZc54poJ8vqawd8TraNryQeJnvH1eLpIDgbiqymM"
 
-  build-devshells:
-    <<: *run-job
-    strategy:
-      matrix:
-        target: ${{ fromJSON(needs.discover.outputs.hits).devshells.build }}
-
-  publish-containers:
-    <<: *run-job
-    strategy:
-      matrix:
-        target: ${{ fromJSON(needs.discover.outputs.hits).containers.publish }}
+  #publish-containers:
+  #  <<: *run-job
+  #  strategy:
+  #    matrix:
+  #      target: ${{ fromJSON(needs.discover.outputs.hits).containers.publish }}
