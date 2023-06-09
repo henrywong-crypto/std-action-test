@@ -13,7 +13,7 @@ jobs:
         with:
           nix_conf: |
             experimental-features = nix-command flakes
-            access-tokens = github.com=${{ secrets.HUT_PAT }}
+            access-tokens = github.com=${{ secrets.HUB_PAT }}
 
       - name: Nix Flake Show
         run: nix flake show
