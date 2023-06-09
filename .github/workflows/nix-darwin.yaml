@@ -22,7 +22,7 @@ jobs:
       #  run: nix run --show-trace --print-build-logs .#x86_64-darwin.std.cli.default -- std --version
 
       - name: Check std devshells
-        run: nix develop --show-trace --print-build-logs .#devShells.x86_64-darwin.default --command yamllint .
+        run: nix develop --show-trace --print-build-logs . --command yamllint .
 
       #- name: Check std data clade
       #  run: nix develop --show-trace --print-build-logs .#devShells.x86_64-darwin.checks --command blocktype-data
